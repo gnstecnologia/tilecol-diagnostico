@@ -1,8 +1,8 @@
 /**
  * Design System: Tilecol Modern Audit Report
  * Paleta: Laranja vibrante (#FF8C00) + Cinza escuro + Branco
- * Componentes: Score rings animados, gráficos Recharts, sidebar moderna, cards com hover
- * Logo: Tilecol branca em fundos laranja
+ * Ícones: Lucide React
+ * Animações: Hover effects sofisticados, transições fluidas
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -14,30 +14,51 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  RadialBarChart,
-  RadialBar,
-  Cell,
   PieChart,
   Pie,
   Legend,
+  Cell,
 } from "recharts";
+import {
+  BarChart3,
+  Zap,
+  Search,
+  Radio,
+  Target,
+  Accessibility,
+  Rocket,
+  Menu,
+  X,
+  TrendingDown,
+  AlertCircle,
+  CheckCircle,
+  AlertTriangle,
+  Eye,
+  Code,
+  Activity,
+  Layers,
+  Settings,
+  Users,
+  FileText,
+  Clock,
+} from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface NavSection {
   id: string;
   label: string;
-  icon: string;
+  icon: React.ReactNode;
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const NAV_SECTIONS: NavSection[] = [
-  { id: "resumo", label: "Resumo Executivo", icon: "📊" },
-  { id: "performance", label: "Performance", icon: "⚡" },
-  { id: "seo", label: "SEO", icon: "🔍" },
-  { id: "rastreamento", label: "Rastreamento", icon: "📡" },
-  { id: "ux", label: "UX & Conversão", icon: "🎯" },
-  { id: "acessibilidade", label: "Acessibilidade", icon: "♿" },
-  { id: "plano", label: "Plano de Ação", icon: "🚀" },
+  { id: "resumo", label: "Resumo Executivo", icon: <BarChart3 size={20} /> },
+  { id: "performance", label: "Performance", icon: <Zap size={20} /> },
+  { id: "seo", label: "SEO", icon: <Search size={20} /> },
+  { id: "rastreamento", label: "Rastreamento", icon: <Radio size={20} /> },
+  { id: "ux", label: "UX & Conversão", icon: <Target size={20} /> },
+  { id: "acessibilidade", label: "Acessibilidade", icon: <Accessibility size={20} /> },
+  { id: "plano", label: "Plano de Ação", icon: <Rocket size={20} /> },
 ];
 
 const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370803495/BLeQiUyMtcXjHxha.png";
@@ -137,15 +158,16 @@ function MetricCard({
   target?: string;
 }) {
   const statusConfig = {
-    good: { color: "#10B981", bg: "rgba(16,185,129,0.08)", icon: "✓", label: "Bom" },
-    warning: { color: "#F59E0B", bg: "rgba(245,158,11,0.08)", icon: "!", label: "Atenção" },
-    bad: { color: "#DC2626", bg: "rgba(220,38,38,0.08)", icon: "✗", label: "Crítico" },
+    good: { color: "#10B981", bg: "rgba(16,185,129,0.08)", icon: CheckCircle, label: "Bom" },
+    warning: { color: "#F59E0B", bg: "rgba(245,158,11,0.08)", icon: AlertTriangle, label: "Atenção" },
+    bad: { color: "#DC2626", bg: "rgba(220,38,38,0.08)", icon: AlertCircle, label: "Crítico" },
   };
   const cfg = statusConfig[status];
+  const IconComponent = cfg.icon;
 
   return (
     <div
-      className="metric-card rounded-xl p-5 border bg-white transition-all duration-300 hover:shadow-lg"
+      className="metric-card card-stagger rounded-xl p-5 border bg-white transition-all duration-300 hover:shadow-lg"
       style={{
         borderColor: "#E8EAED",
         borderLeft: `4px solid ${cfg.color}`,
@@ -158,12 +180,13 @@ function MetricCard({
         >
           {label}
         </span>
-        <span
-          className="text-xs px-2 py-0.5 rounded-full font-semibold"
+        <div
+          className="flex items-center gap-1 px-2 py-0.5 rounded-full font-semibold text-xs transition-all duration-300"
           style={{ background: cfg.bg, color: cfg.color }}
         >
+          <IconComponent size={14} />
           {cfg.label}
-        </span>
+        </div>
       </div>
       <div className="flex items-baseline gap-1 mb-1">
         <span
@@ -199,7 +222,7 @@ function PriorityBadge({ level }: { level: "ALTA" | "MÉDIA" | "BAIXA" }) {
   };
   return (
     <span
-      className={`${config[level]} text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap`}
+      className={`${config[level]} text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap transition-all duration-300 hover:scale-105`}
     >
       {level}
     </span>
@@ -221,7 +244,7 @@ function StatusBadge({
   const cfg = config[status];
   return (
     <span
-      className="text-xs font-semibold px-2.5 py-1 rounded-full"
+      className="text-xs font-semibold px-2.5 py-1 rounded-full transition-all duration-300 hover:scale-105"
       style={{
         background: cfg.bg,
         color: cfg.color,
@@ -241,14 +264,16 @@ function SectionHeading({
   subtitle,
 }: {
   id: string;
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   subtitle?: string;
 }) {
   return (
-    <div id={id} className="mb-8 pt-2">
+    <div id={id} className="mb-8 pt-2 section-heading">
       <div className="flex items-center gap-3 mb-2">
-        <span className="text-2xl">{icon}</span>
+        <div className="section-icon text-orange-500 transition-all duration-300">
+          {icon}
+        </div>
         <h2
           className="text-2xl font-bold"
           style={{ color: "#1A1A2E" }}
@@ -304,20 +329,20 @@ export default function Home() {
   };
 
   // Chart data
-  const performanceData = [
-    { name: "Desempenho\n(Mobile)", value: 56, fill: "#DC2626" },
-    { name: "Acessibilidade", value: 90, fill: "#F59E0B" },
-    { name: "Boas Práticas", value: 92, fill: "#10B981" },
-    { name: "SEO", value: 92, fill: "#10B981" },
+  const threadData = [
+    { name: "Avaliação de Scripts", value: 889, fill: "#DC2626" },
+    { name: "Style & Layout", value: 487, fill: "#F59E0B" },
+    { name: "Outros", value: 421, fill: "#8892A4" },
+    { name: "Compilação JS", value: 392, fill: "#FF8C00" },
+    { name: "Parse HTML/CSS", value: 154, fill: "#10B981" },
+    { name: "Renderização", value: 139, fill: "#5A6478" },
   ];
 
-  const cwvData = [
-    { metric: "LCP", valor: 13.1, meta: 2.5, status: "bad" },
-    { metric: "FCP", valor: 4.8, meta: 1.8, status: "bad" },
-    { metric: "TTFB", valor: 3.0, meta: 0.8, status: "bad" },
-    { metric: "TBT", valor: 0.3, meta: 0.2, status: "warning" },
-    { metric: "CLS", valor: 0.014, meta: 0.1, status: "good" },
-    { metric: "INP", valor: 0.117, meta: 0.2, status: "good" },
+  const cssPayloadData = [
+    { name: "CSS Não Utilizado", value: 303, fill: "#DC2626" },
+    { name: "JS Não Utilizado", value: 315, fill: "#F59E0B" },
+    { name: "Imagens Não Otimizadas", value: 780, fill: "#FF8C00" },
+    { name: "Sem Cache", value: 3431, fill: "#8892A4" },
   ];
 
   const trackingData = [
@@ -398,22 +423,6 @@ export default function Home() {
     },
   ];
 
-  const cssPayloadData = [
-    { name: "CSS Não Utilizado", value: 303, fill: "#DC2626" },
-    { name: "JS Não Utilizado", value: 315, fill: "#F59E0B" },
-    { name: "Imagens Não Otimizadas", value: 780, fill: "#FF8C00" },
-    { name: "Sem Cache", value: 3431, fill: "#8892A4" },
-  ];
-
-  const threadData = [
-    { name: "Avaliação de Scripts", value: 889, fill: "#DC2626" },
-    { name: "Style & Layout", value: 487, fill: "#F59E0B" },
-    { name: "Outros", value: 421, fill: "#8892A4" },
-    { name: "Compilação JS", value: 392, fill: "#FF8C00" },
-    { name: "Parse HTML/CSS", value: 154, fill: "#10B981" },
-    { name: "Renderização", value: 139, fill: "#5A6478" },
-  ];
-
   return (
     <div className="min-h-screen" style={{ background: "#F8F9FA" }}>
       {/* ── Mobile Header ── */}
@@ -426,16 +435,10 @@ export default function Home() {
         </div>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-1.5 rounded-lg transition-all"
+          className="p-1.5 rounded-lg transition-all hover:bg-orange-600"
           style={{ background: "rgba(255,255,255,0.15)" }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {sidebarOpen ? (
-              <path d="M18 6L6 18M6 6l12 12" />
-            ) : (
-              <path d="M3 12h18M3 6h18M3 18h18" />
-            )}
-          </svg>
+          {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </header>
 
@@ -463,7 +466,7 @@ export default function Home() {
             <button
               key={id}
               onClick={() => scrollTo(id)}
-              className={`w-full text-left px-5 py-3 flex items-center gap-3 text-sm transition-all duration-150`}
+              className={`w-full text-left px-5 py-3 flex items-center gap-3 text-sm transition-all duration-150 group`}
               style={{
                 color: activeSection === id ? "white" : "rgba(255,255,255,0.75)",
                 background: activeSection === id ? "rgba(255,255,255,0.15)" : undefined,
@@ -471,7 +474,9 @@ export default function Home() {
                 fontWeight: activeSection === id ? 600 : 400,
               }}
             >
-              <span className="text-base">{icon}</span>
+              <span className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                {icon}
+              </span>
               <span>{label}</span>
             </button>
           ))}
@@ -526,25 +531,31 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6">
               {[
-                { label: "Data da Análise", value: "20 Fev 2026" },
-                { label: "Plataforma", value: "WordPress + Elementor" },
-                { label: "Ferramenta", value: "PageSpeed + Auditoria Manual" },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="px-4 py-2 rounded-lg"
-                  style={{ background: "rgba(255,255,255,0.12)" }}
-                >
-                  <div className="text-xs opacity-70 text-white">
-                    {item.label}
-                  </div>
+                { label: "Data da Análise", value: "20 Fev 2026", icon: Clock },
+                { label: "Plataforma", value: "WordPress + Elementor", icon: Layers },
+                { label: "Ferramenta", value: "PageSpeed + Auditoria Manual", icon: Settings },
+              ].map((item) => {
+                const IconComp = item.icon;
+                return (
                   <div
-                    className="text-sm font-semibold text-white"
+                    key={item.label}
+                    className="px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2"
+                    style={{ background: "rgba(255,255,255,0.12)" }}
                   >
-                    {item.value}
+                    <IconComp size={16} style={{ color: "white" }} />
+                    <div>
+                      <div className="text-xs opacity-70 text-white">
+                        {item.label}
+                      </div>
+                      <div
+                        className="text-sm font-semibold text-white"
+                      >
+                        {item.value}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -555,14 +566,14 @@ export default function Home() {
           {/* ── RESUMO EXECUTIVO ── */}
           <SectionHeading
             id="resumo"
-            icon="📊"
+            icon={<BarChart3 size={28} />}
             title="Resumo Executivo"
             subtitle="Visão geral dos pontos críticos identificados e scores do Lighthouse"
           />
 
           {/* Lighthouse Scores */}
           <div
-            className="rounded-2xl p-8 mb-8 border bg-white"
+            className="rounded-2xl p-8 mb-8 border bg-white transition-all duration-300 hover:shadow-lg"
             style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <h3
@@ -578,15 +589,20 @@ export default function Home() {
               <ScoreRing score={92} label="SEO" color="#10B981" />
             </div>
             <div
-              className="mt-8 p-5 rounded-xl text-sm"
+              className="mt-8 p-5 rounded-xl text-sm transition-all duration-300 hover:shadow-md"
               style={{ background: "rgba(220, 38, 38, 0.06)", borderLeft: "4px solid #DC2626" }}
             >
-              <strong style={{ color: "#DC2626" }}>⚠ Atenção Crítica:</strong>{" "}
-              <span style={{ color: "#5A6478" }}>
-                A pontuação de Desempenho de <strong>56/100</strong> no mobile é o problema mais urgente.
-                Impacta a experiência do usuário, taxa de rejeição e ranking no Google.
-                As Core Web Vitals estão <strong>reprovadas</strong> nos dados reais de campo.
-              </span>
+              <div className="flex items-start gap-3">
+                <AlertCircle size={20} style={{ color: "#DC2626", flexShrink: 0 }} />
+                <div>
+                  <strong style={{ color: "#DC2626" }}>Atenção Crítica:</strong>{" "}
+                  <span style={{ color: "#5A6478" }}>
+                    A pontuação de Desempenho de <strong>56/100</strong> no mobile é o problema mais urgente.
+                    Impacta a experiência do usuário, taxa de rejeição e ranking no Google.
+                    As Core Web Vitals estão <strong>reprovadas</strong> nos dados reais de campo.
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -604,7 +620,7 @@ export default function Home() {
           {/* ── PERFORMANCE ── */}
           <SectionHeading
             id="performance"
-            icon="⚡"
+            icon={<Zap size={28} />}
             title="Performance Técnica"
             subtitle="Análise detalhada das métricas de velocidade e Core Web Vitals"
           />
@@ -621,7 +637,7 @@ export default function Home() {
 
           {/* Thread Main Work Chart */}
           <div
-            className="rounded-2xl p-8 mb-8 border bg-white"
+            className="rounded-2xl p-8 mb-8 border bg-white transition-all duration-300 hover:shadow-lg"
             style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <h3
@@ -653,7 +669,7 @@ export default function Home() {
 
           {/* Payload Chart */}
           <div
-            className="rounded-2xl p-8 mb-12 border bg-white"
+            className="rounded-2xl p-8 mb-12 border bg-white transition-all duration-300 hover:shadow-lg"
             style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <h3
@@ -692,9 +708,9 @@ export default function Home() {
               </ResponsiveContainer>
               <div className="flex flex-col justify-center gap-3">
                 {cssPayloadData.map((item) => (
-                  <div key={item.name} className="flex items-center justify-between">
+                  <div key={item.name} className="flex items-center justify-between transition-all duration-300 hover:translate-x-1">
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-sm" style={{ background: item.fill }} />
+                      <div className="w-3 h-3 rounded-sm transition-all duration-300 hover:scale-125" style={{ background: item.fill }} />
                       <span className="text-sm" style={{ color: "#5A6478" }}>
                         {item.name}
                       </span>
@@ -726,7 +742,7 @@ export default function Home() {
           {/* ── SEO ── */}
           <SectionHeading
             id="seo"
-            icon="🔍"
+            icon={<Search size={28} />}
             title="SEO Técnico"
             subtitle="Análise da estrutura de otimização para mecanismos de busca"
           />
@@ -737,7 +753,7 @@ export default function Home() {
           </div>
 
           <div
-            className="rounded-2xl border overflow-hidden mb-8 bg-white"
+            className="rounded-2xl border overflow-hidden mb-8 bg-white transition-all duration-300 hover:shadow-lg"
             style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b" style={{ borderColor: "#E8EAED" }}>
@@ -761,15 +777,15 @@ export default function Home() {
                 { item: "Alt text em imagens", status: true, obs: "Maioria possui atributo alt" },
                 { item: "Core Web Vitals aprovadas", status: false, obs: "REPROVADO — LCP de 5,2s no campo" },
               ].map((row) => (
-                <div key={row.item} className="px-8 py-3.5 flex items-start gap-4 hover:bg-gray-50 transition-colors">
+                <div key={row.item} className="px-8 py-3.5 flex items-start gap-4 table-row-hover">
                   <span
-                    className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold"
+                    className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300"
                     style={{
                       background: row.status ? "rgba(16,185,129,0.12)" : "rgba(220,38,38,0.12)",
                       color: row.status ? "#065F46" : "#991B1B",
                     }}
                   >
-                    {row.status ? "✓" : "✗"}
+                    {row.status ? <CheckCircle size={14} /> : <AlertCircle size={14} />}
                   </span>
                   <div className="flex-1">
                     <div
@@ -790,13 +806,13 @@ export default function Home() {
           {/* ── RASTREAMENTO ── */}
           <SectionHeading
             id="rastreamento"
-            icon="📡"
+            icon={<Radio size={28} />}
             title="Rastreamento & Qualidade de Dados"
             subtitle="Diagnóstico da estrutura de analytics, pixels e mensuração de conversões"
           />
 
           <div
-            className="rounded-2xl border overflow-hidden mb-8 bg-white"
+            className="rounded-2xl border overflow-hidden mb-8 bg-white transition-all duration-300 hover:shadow-lg"
             style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b" style={{ borderColor: "#E8EAED" }}>
@@ -824,7 +840,7 @@ export default function Home() {
                 </thead>
                 <tbody className="divide-y" style={{ borderColor: "#F5F6F8" }}>
                   {trackingData.map((row) => (
-                    <tr key={row.tool} className="hover:bg-gray-50 transition-colors">
+                    <tr key={row.tool} className="table-row-hover">
                       <td
                         className="px-8 py-3.5 text-sm font-medium"
                         style={{ color: "#1A1A2E" }}
@@ -856,15 +872,18 @@ export default function Home() {
           {/* Data Quality */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
             <div
-              className="rounded-xl p-6 border"
+              className="rounded-xl p-6 border transition-all duration-300 hover:shadow-lg"
               style={{ background: "rgba(220, 38, 38, 0.04)", borderColor: "rgba(220, 38, 38, 0.2)" }}
             >
-              <h4
-                className="text-sm font-bold mb-3"
-                style={{ color: "#DC2626" }}
-              >
-                ⚠ Problemas Críticos de Dados
-              </h4>
+              <div className="flex items-center gap-2 mb-3">
+                <AlertCircle size={20} style={{ color: "#DC2626" }} />
+                <h4
+                  className="text-sm font-bold"
+                  style={{ color: "#DC2626" }}
+                >
+                  Problemas Críticos de Dados
+                </h4>
+              </div>
               <ul className="space-y-2 text-sm" style={{ color: "#5A6478" }}>
                 <li>• Sem rastreamento de envio de formulários</li>
                 <li>• Sem página de Obrigado</li>
@@ -874,15 +893,18 @@ export default function Home() {
               </ul>
             </div>
             <div
-              className="rounded-xl p-6 border"
+              className="rounded-xl p-6 border transition-all duration-300 hover:shadow-lg"
               style={{ background: "rgba(16, 185, 129, 0.04)", borderColor: "rgba(16, 185, 129, 0.2)" }}
             >
-              <h4
-                className="text-sm font-bold mb-3"
-                style={{ color: "#10B981" }}
-              >
-                ✓ O que está funcionando
-              </h4>
+              <div className="flex items-center gap-2 mb-3">
+                <CheckCircle size={20} style={{ color: "#10B981" }} />
+                <h4
+                  className="text-sm font-bold"
+                  style={{ color: "#10B981" }}
+                >
+                  O que está funcionando
+                </h4>
+              </div>
               <ul className="space-y-2 text-sm" style={{ color: "#5A6478" }}>
                 <li>• GTM instalado e funcionando</li>
                 <li>• GA4 carregando via GTM</li>
@@ -896,7 +918,7 @@ export default function Home() {
           {/* ── UX & CONVERSÃO ── */}
           <SectionHeading
             id="ux"
-            icon="🎯"
+            icon={<Target size={28} />}
             title="UX & Conversão"
             subtitle="Análise da jornada do usuário, CTAs e estrutura de geração de leads"
           />
@@ -907,7 +929,7 @@ export default function Home() {
           </div>
 
           <div
-            className="rounded-2xl border overflow-hidden mb-8 bg-white"
+            className="rounded-2xl border overflow-hidden mb-8 bg-white transition-all duration-300 hover:shadow-lg"
             style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b" style={{ borderColor: "#E8EAED" }}>
@@ -921,11 +943,11 @@ export default function Home() {
             <div className="p-6">
               <div className="flex flex-col gap-4">
                 {[
-                  { step: "1", label: "Chegada ao Site", status: "warning", desc: "Usuário aguarda 4,8s para ver o primeiro conteúdo. Alta taxa de abandono." },
-                  { step: "2", label: "Navegação pelo Catálogo", status: "good", desc: "Categorias bem definidas. Filtros disponíveis. Boa organização visual." },
-                  { step: "3", label: "Visualização do Produto", status: "warning", desc: "Informações técnicas adequadas. Sem preço, sem estoque, sem indicação clara." },
-                  { step: "4", label: "Tentativa de Contato", status: "bad", desc: "Formulário com 8 campos obrigatórios. Alta fricção. Usuário pode desistir." },
-                  { step: "5", label: "Pós-Conversão", status: "bad", desc: "Sem página de Obrigado. Sem confirmação visual. Experiência incompleta." },
+                  { step: "1", label: "Chegada ao Site", status: "warning", desc: "Usuário aguarda 4,8s para ver o primeiro conteúdo. Alta taxa de abandono.", icon: Eye },
+                  { step: "2", label: "Navegação pelo Catálogo", status: "good", desc: "Categorias bem definidas. Filtros disponíveis. Boa organização visual.", icon: Layers },
+                  { step: "3", label: "Visualização do Produto", status: "warning", desc: "Informações técnicas adequadas. Sem preço, sem estoque, sem indicação clara.", icon: FileText },
+                  { step: "4", label: "Tentativa de Contato", status: "bad", desc: "Formulário com 8 campos obrigatórios. Alta fricção. Usuário pode desistir.", icon: Users },
+                  { step: "5", label: "Pós-Conversão", status: "bad", desc: "Sem página de Obrigado. Sem confirmação visual. Experiência incompleta.", icon: Activity },
                 ].map((item) => {
                   const colors = {
                     good: { bg: "rgba(16,185,129,0.08)", border: "#10B981", num: "#10B981" },
@@ -933,24 +955,28 @@ export default function Home() {
                     bad: { bg: "rgba(220,38,38,0.08)", border: "#DC2626", num: "#DC2626" },
                   };
                   const cfg = colors[item.status as keyof typeof colors];
+                  const IconComp = item.icon;
                   return (
                     <div
                       key={item.step}
-                      className="flex gap-4 p-4 rounded-xl transition-all hover:shadow-md"
+                      className="journey-step flex gap-4 p-4 rounded-xl transition-all"
                       style={{ background: cfg.bg, borderLeft: `4px solid ${cfg.border}` }}
                     >
                       <div
-                        className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all duration-300"
                         style={{ background: cfg.border, color: "white" }}
                       >
                         {item.step}
                       </div>
-                      <div>
-                        <div
-                          className="text-sm font-semibold mb-1"
-                          style={{ color: "#1A1A2E" }}
-                        >
-                          {item.label}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <div
+                            className="text-sm font-semibold"
+                            style={{ color: "#1A1A2E" }}
+                          >
+                            {item.label}
+                          </div>
+                          <IconComp size={16} style={{ color: cfg.border, opacity: 0.6 }} />
                         </div>
                         <div className="text-sm" style={{ color: "#5A6478" }}>
                           {item.desc}
@@ -966,7 +992,7 @@ export default function Home() {
           {/* ── ACESSIBILIDADE ── */}
           <SectionHeading
             id="acessibilidade"
-            icon="♿"
+            icon={<Accessibility size={28} />}
             title="Acessibilidade"
             subtitle="Conformidade com WCAG e boas práticas de inclusividade"
           />
@@ -977,7 +1003,7 @@ export default function Home() {
           </div>
 
           <div
-            className="rounded-2xl border overflow-hidden mb-12 bg-white"
+            className="rounded-2xl border overflow-hidden mb-12 bg-white transition-all duration-300 hover:shadow-lg"
             style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b" style={{ borderColor: "#E8EAED" }}>
@@ -1002,9 +1028,9 @@ export default function Home() {
                 };
                 const sev = sevColors[row.severity as keyof typeof sevColors];
                 return (
-                  <div key={row.issue} className="px-8 py-4 flex items-start gap-4 hover:bg-gray-50 transition-colors">
+                  <div key={row.issue} className="px-8 py-4 flex items-start gap-4 table-row-hover">
                     <span
-                      className="mt-0.5 text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0"
+                      className="mt-0.5 text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0 transition-all duration-300"
                       style={{ background: sev.bg, color: sev.color }}
                     >
                       {row.severity}
@@ -1029,13 +1055,13 @@ export default function Home() {
           {/* ── PLANO DE AÇÃO ── */}
           <SectionHeading
             id="plano"
-            icon="🚀"
+            icon={<Rocket size={28} />}
             title="Plano de Ação Priorizado"
             subtitle="Recomendações ordenadas por impacto e urgência"
           />
 
           <div
-            className="rounded-2xl border overflow-hidden mb-8 bg-white"
+            className="rounded-2xl border overflow-hidden mb-8 bg-white transition-all duration-300 hover:shadow-lg"
             style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b flex items-center justify-between" style={{ borderColor: "#E8EAED" }}>
@@ -1053,7 +1079,7 @@ export default function Home() {
             </div>
             <div className="divide-y" style={{ borderColor: "#F5F6F8" }}>
               {actionPlan.map((item, i) => (
-                <div key={i} className="px-8 py-5 hover:bg-gray-50 transition-colors">
+                <div key={i} className="px-8 py-5 table-row-hover">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 mt-0.5">
                       <PriorityBadge level={item.priority} />
@@ -1067,24 +1093,25 @@ export default function Home() {
                           {item.action}
                         </h4>
                         <span
-                          className="text-xs px-2 py-0.5 rounded"
+                          className="text-xs px-2 py-0.5 rounded transition-all duration-300 hover:scale-105"
                           style={{ background: "#F0F2F5", color: "#5A6478" }}
                         >
                           {item.area}
                         </span>
                       </div>
                       <div
-                        className="text-xs mb-2"
+                        className="text-xs mb-2 flex items-center gap-1"
                         style={{ color: "#10B981" }}
                       >
-                        🎯 Impacto: {item.impact}
+                        <TrendingDown size={14} />
+                        Impacto: {item.impact}
                       </div>
                       <p className="text-sm" style={{ color: "#5A6478", lineHeight: 1.6 }}>
                         {item.detail}
                       </p>
                     </div>
                     <div
-                      className="flex-shrink-0 text-xs px-2 py-1 rounded font-semibold"
+                      className="flex-shrink-0 text-xs px-2 py-1 rounded font-semibold transition-all duration-300 hover:scale-105"
                       style={{
                         background: item.effort === "Alto" ? "rgba(220,38,38,0.08)" : item.effort === "Médio" ? "rgba(245,158,11,0.08)" : "rgba(16,185,129,0.08)",
                         color: item.effort === "Alto" ? "#991B1B" : item.effort === "Médio" ? "#92400E" : "#065F46",
@@ -1100,7 +1127,7 @@ export default function Home() {
 
           {/* Closing Note */}
           <div
-            className="rounded-2xl p-8 mb-12"
+            className="rounded-2xl p-8 mb-12 transition-all duration-300 hover:shadow-lg"
             style={{
               background: "linear-gradient(135deg, #FF8C00 0%, #E67E00 100%)",
               color: "white",
@@ -1108,8 +1135,9 @@ export default function Home() {
             }}
           >
             <h3
-              className="text-xl font-bold mb-3"
+              className="text-xl font-bold mb-3 flex items-center gap-2"
             >
+              <Rocket size={24} />
               Conclusão e Próximos Passos
             </h3>
             <p
@@ -1135,7 +1163,7 @@ export default function Home() {
               ].map((phase) => (
                 <div
                   key={phase.phase}
-                  className="rounded-xl p-4"
+                  className="rounded-xl p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                   style={{ background: "rgba(255,255,255,0.12)" }}
                 >
                   <div
@@ -1148,10 +1176,11 @@ export default function Home() {
                     {phase.items.map((item) => (
                       <li
                         key={item}
-                        className="text-xs"
+                        className="text-xs flex items-center gap-2"
                         style={{ color: "rgba(255,255,255,0.8)" }}
                       >
-                        → {item}
+                        <Code size={12} />
+                        {item}
                       </li>
                     ))}
                   </ul>
@@ -1162,7 +1191,7 @@ export default function Home() {
 
           {/* Footer */}
           <div
-            className="text-center py-6 border-t text-xs"
+            className="text-center py-6 border-t text-xs transition-all duration-300 hover:text-orange-600"
             style={{ borderColor: "#E8EAED", color: "#8892A4" }}
           >
             Diagnóstico elaborado em 20 de fevereiro de 2026 · Site: tilecol.com.br ·

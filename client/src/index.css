@@ -193,8 +193,70 @@
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .metric-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(255, 140, 0, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(255, 140, 0, 0.12);
+  }
+
+  /* Icon Hover Animation */
+  .icon-hover {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .icon-hover:hover {
+    transform: scale(1.1) rotate(5deg);
+    color: #FF8C00;
+  }
+
+  /* Section Icon Animation */
+  .section-icon {
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .section-heading:hover .section-icon {
+    transform: scale(1.15) translateX(4px);
+  }
+
+  /* Animated Underline */
+  @keyframes slideInRight {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  .gradient-divider {
+    animation: slideInRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* Badge Pulse Animation */
+  @keyframes badgePulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(255, 140, 0, 0);
+    }
+  }
+  .badge-pulse {
+    animation: badgePulse 2s infinite;
+  }
+
+  /* Row Hover */
+  .table-row-hover {
+    transition: all 0.2s ease;
+  }
+  .table-row-hover:hover {
+    background-color: rgba(255, 140, 0, 0.04);
+    transform: translateX(2px);
+  }
+
+  /* Journey Step Hover */
+  .journey-step {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .journey-step:hover {
+    transform: translateX(4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
   }
 
   /* Gradient Divider */
@@ -203,6 +265,24 @@
     height: 2px;
     border-radius: 1px;
   }
+
+  /* Stagger Animation for Cards */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .card-stagger {
+    animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .card-stagger:nth-child(1) { animation-delay: 0.1s; }
+  .card-stagger:nth-child(2) { animation-delay: 0.2s; }
+  .card-stagger:nth-child(3) { animation-delay: 0.3s; }
 
   /* Print Styles */
   @media print {
