@@ -57,6 +57,7 @@ const NAV_SECTIONS: NavSection[] = [
   { id: "seo", label: "SEO", icon: <Search size={20} /> },
   { id: "rastreamento", label: "Rastreamento", icon: <Radio size={20} /> },
   { id: "ux", label: "UX & Conversão", icon: <Target size={20} /> },
+  { id: "visual", label: "Melhoria Visual (UI/UX)", icon: <Eye size={20} /> },
   { id: "acessibilidade", label: "Acessibilidade", icon: <Accessibility size={20} /> },
   { id: "plano", label: "Plano de Ação", icon: <Rocket size={20} /> },
 ];
@@ -987,6 +988,116 @@ export default function Home() {
                 })}
               </div>
             </div>
+          </div>
+
+          {/* ── PONTOS DE MELHORIA VISUAL ── */}
+          <SectionHeading
+            id="visual"
+            icon={<Eye size={28} />}
+            title="Pontos de Melhoria Visual (UI/UX)"
+            subtitle="Análise profissional de layout, experiência visual e usabilidade"
+          />
+
+          <div className="grid grid-cols-1 gap-5 mb-12">
+            {[
+              {
+                area: "Home",
+                issues: [
+                  "Banner principal com altura superior à viewport em diversos dispositivos, prejudicando visualização inicial",
+                  "Inconsistência visual nas bordas: logo com bordas arredondadas, cards e imagens totalmente retos",
+                  "Imagem do produto principal apagada, sem contraste ou destaque adequado",
+                  "Links aplicados apenas em textos; cards completos não são clicáveis",
+                  "CTA principal sem botão visual, apenas link textual",
+                  "Imagens de produtos com link, mas sem indicação visual de clicabilidade",
+                  "Apenas um único botão de ação em toda a Home, reduzindo chances de conversão",
+                  "Inconsistência em animações de hover e possíveis erros de CSS",
+                  "Falta de clareza na navegação geral",
+                ],
+              },
+              {
+                area: "Páginas de Produtos",
+                issues: [
+                  "Ausência de filtros avançados: busca por palavra-chave, ordenação por preço, filtro por faixa de preço",
+                  "Falta de tags estratégicas: Mais Vendido, Mais Popular, Melhor Custo-Benefício, Novidade",
+                  "Imagens principais de produtos cortadas ou mal enquadradas",
+                  "Produtos sem descrição breve e objetiva",
+                  "Ausência de informações sobre métodos de pagamento",
+                  "Erros de CSS nas categorias laterais",
+                  "Falta de diferenciação visual entre grade de produtos e área de filtros",
+                ],
+              },
+              {
+                area: "Formulários",
+                issues: [
+                  "Formulários excessivamente grandes, totalmente retos e sem estilização visual",
+                  "Campos muito extensos com falta de organização visual",
+                  "Falta de hierarquia visual e redução de espaçamentos excessivos",
+                  "Ausência de bordas arredondadas ou padronização estética",
+                  "Sem uso de grid para melhor organização dos campos",
+                  "Mensagem de erro em inglês: 'One or more fields have an error. Please check and try again.'",
+                  "Recomenda-se divisão em etapas (multi-step form) para melhorar experiência",
+                ],
+              },
+              {
+                area: "Área de Downloads",
+                issues: [
+                  "Palavra 'Link' em amarelo e sublinhado não comunica claramente a ação",
+                  "Falta de botão visual indicando download",
+                  "Ausência de ícones que reforcem a ação (ex: ícone de download)",
+                  "Baixa usabilidade na apresentação dos downloads",
+                  "Falta de organização e espaçamento da seção",
+                ],
+              },
+              {
+                area: "Design Geral",
+                issues: [
+                  "Rodapé desatualizado: 'Tilecol © 2023' — necessário atualizar o ano",
+                  "Espaçamentos excessivos em submenus e categorias",
+                  "Falta de hierarquia tipográfica clara",
+                  "Excesso de itens e ícones na NavBar, causando poluição visual",
+                  "Todos os banners utilizam o mesmo fundo cinza opaco, sem variação de cor, gradiente ou diferenciação visual",
+                ],
+              },
+            ].map((section) => (
+              <div
+                key={section.area}
+                className="rounded-2xl border overflow-hidden bg-white transition-all duration-300 hover:shadow-lg"
+                style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+              >
+                <div className="px-8 py-5 border-b flex items-center gap-3" style={{ borderColor: "#E8EAED" }}>
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
+                    style={{ background: "rgba(255, 140, 0, 0.1)" }}
+                  >
+                    <Eye size={20} style={{ color: "#FF8C00" }} />
+                  </div>
+                  <h3
+                    className="text-sm font-semibold uppercase tracking-wider"
+                    style={{ color: "#8892A4" }}
+                  >
+                    {section.area}
+                  </h3>
+                </div>
+                <div className="divide-y" style={{ borderColor: "#F5F6F8" }}>
+                  {section.issues.map((issue, idx) => (
+                    <div key={idx} className="px-8 py-3.5 flex items-start gap-4 table-row-hover">
+                      <span
+                        className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300"
+                        style={{
+                          background: "rgba(255, 140, 0, 0.12)",
+                          color: "#FF8C00",
+                        }}
+                      >
+                        •
+                      </span>
+                      <p className="text-sm" style={{ color: "#5A6478", lineHeight: 1.6 }}>
+                        {issue}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* ── ACESSIBILIDADE ── */}
