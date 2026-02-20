@@ -447,7 +447,7 @@ export default function Home() {
       <aside
         className={`fixed top-0 left-0 h-full z-40 flex flex-col transition-transform duration-300 no-print
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
-        style={{ width: "260px", background: "#FF8C00" }}
+        style={{ width: "260px", background: "#000" }}
       >
         {/* Logo */}
         <div className="p-6 border-b" style={{ borderColor: "rgba(255,255,255,0.15)" }}>
@@ -484,12 +484,6 @@ export default function Home() {
         </nav>
 
         {/* Footer */}
-        <div
-          className="p-4 text-xs opacity-60 border-t"
-          style={{ borderColor: "rgba(255,255,255,0.15)", color: "white" }}
-        >
-          Análise realizada em 20/02/2026
-        </div>
       </aside>
 
       {/* ── Main Content ── */}
@@ -502,9 +496,9 @@ export default function Home() {
         <div
           className="px-8 py-12 border-b"
           style={{
-            background: "linear-gradient(135deg, #FF8C00 0%, #E67E00 100%)",
+            background: "linear-gradient(135deg, #0a0a0a 0%, #2d2d2d 50%, #1a1a1a 100%)",
             borderColor: "#E8EAED",
-            boxShadow: "0 4px 20px rgba(255, 140, 0, 0.15)",
+            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.25)",
           }}
         >
           <div className="max-w-4xl">
@@ -1275,7 +1269,7 @@ export default function Home() {
                 <div
                   key={phase.phase}
                   className="rounded-xl p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                  style={{ background: "rgba(255,255,255,0.12)" }}
+                  style={{ background: "#d47500", border: "1px solid #ffffff9e" }}
                 >
                   <div
                     className="text-xs font-bold mb-2"
@@ -1305,7 +1299,7 @@ export default function Home() {
             className="text-center py-6 border-t text-xs transition-all duration-300 hover:text-orange-600"
             style={{ borderColor: "#E8EAED", color: "#8892A4" }}
           >
-            Diagnóstico elaborado em 20 de fevereiro de 2026 · Site: tilecol.com.br ·
+            Site: tilecol.com.br ·
             Ferramentas: Google PageSpeed Insights, Chrome DevTools, Auditoria Manual
           </div>
         </div>

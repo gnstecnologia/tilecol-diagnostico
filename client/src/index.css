@@ -284,6 +284,23 @@
   .card-stagger:nth-child(2) { animation-delay: 0.2s; }
   .card-stagger:nth-child(3) { animation-delay: 0.3s; }
 
+  /* Hide Vercel/Manus preview mode banner */
+  #manus-previewer-root,
+  [id="manus-previewer-root"],
+  iframe[src*="vercel"][src*="toolbar"],
+  [data-vercel-badge],
+  [id^="vercel-toolbar"],
+  [class*="vercel-toolbar"],
+  [class*="preview-banner"],
+  [class*="PreviewBanner"],
+  a[href*="vercel.com"][target="_blank"]:has(+ span):first-of-type {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+
   /* Print Styles */
   @media print {
     .no-print { display: none !important; }
