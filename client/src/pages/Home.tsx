@@ -168,11 +168,10 @@ function MetricCard({
 
   return (
     <div
-      className="metric-card card-stagger rounded-xl p-5 border transition-all duration-300"
+      className="metric-card card-stagger rounded-xl p-5 border bg-white transition-all duration-300 hover:shadow-lg"
       style={{
-        borderColor: cfg.color,
+        borderColor: "#E8EAED",
         borderLeft: `4px solid ${cfg.color}`,
-        background: "#1A1A1A",
       }}
     >
       <div className="flex items-start justify-between mb-3">
@@ -574,10 +573,10 @@ export default function Home() {
           />
 
           {/* Lighthouse Scores */}
-      <div
-        className="rounded-2xl p-8 mb-8 border section-card-hover"
-        style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
-      >
+          <div
+            className="rounded-2xl p-8 mb-8 border bg-white transition-all duration-300 hover:shadow-lg"
+            style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+          >
             <h3
               className="text-sm font-semibold uppercase tracking-wider mb-8"
               style={{ color: "#8892A4" }}
@@ -755,8 +754,8 @@ export default function Home() {
           </div>
 
           <div
-            className="rounded-2xl border overflow-hidden mb-8 section-card-hover"
-            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
+            className="rounded-2xl border overflow-hidden mb-8 bg-white transition-all duration-300 hover:shadow-lg"
+            style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b" style={{ borderColor: "#E8EAED" }}>
               <h3
@@ -814,8 +813,8 @@ export default function Home() {
           />
 
           <div
-            className="rounded-2xl border overflow-hidden mb-8 section-card-hover"
-            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
+            className="rounded-2xl border overflow-hidden mb-8 bg-white transition-all duration-300 hover:shadow-lg"
+            style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b" style={{ borderColor: "#E8EAED" }}>
               <h3
@@ -874,8 +873,8 @@ export default function Home() {
           {/* Data Quality */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
             <div
-              className="rounded-xl p-6 border transition-all duration-300 hover:shadow-lg hover:scale-105"
-              style={{ background: "#1A1A1A", borderColor: "#FF4444", border: "1px solid #FF4444" }}
+              className="rounded-xl p-6 border transition-all duration-300 hover:shadow-lg"
+              style={{ background: "rgba(220, 38, 38, 0.04)", borderColor: "rgba(220, 38, 38, 0.2)" }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <AlertCircle size={20} style={{ color: "#DC2626" }} />
@@ -895,8 +894,8 @@ export default function Home() {
               </ul>
             </div>
             <div
-              className="rounded-xl p-6 border transition-all duration-300 hover:shadow-lg hover:scale-105"
-              style={{ background: "#1A1A1A", borderColor: "#00D084", border: "1px solid #00D084" }}
+              className="rounded-xl p-6 border transition-all duration-300 hover:shadow-lg"
+              style={{ background: "rgba(16, 185, 129, 0.04)", borderColor: "rgba(16, 185, 129, 0.2)" }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <CheckCircle size={20} style={{ color: "#10B981" }} />
@@ -931,8 +930,8 @@ export default function Home() {
           </div>
 
           <div
-            className="rounded-2xl border overflow-hidden mb-8 section-card-hover"
-            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
+            className="rounded-2xl border overflow-hidden mb-8 bg-white transition-all duration-300 hover:shadow-lg"
+            style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b" style={{ borderColor: "#E8EAED" }}>
               <h3
@@ -1173,8 +1172,8 @@ export default function Home() {
           />
 
           <div
-            className="rounded-2xl border overflow-hidden mb-8 section-card-hover"
-            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
+            className="rounded-2xl border overflow-hidden mb-8 bg-white transition-all duration-300 hover:shadow-lg"
+            style={{ borderColor: "#E8EAED", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
           >
             <div className="px-8 py-5 border-b flex items-center justify-between" style={{ borderColor: "#E8EAED" }}>
               <h3
@@ -1238,14 +1237,14 @@ export default function Home() {
           </div>
 
           {/* Closing Note */}
-      <div
-        className="rounded-2xl p-8 mb-12 transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
-        style={{
-          background: "linear-gradient(135deg, #FF8C00 0%, #E67E00 100%)",
-          color: "white",
-          boxShadow: "0 8px 32px rgba(255, 140, 0, 0.3)",
-        }}
-      >
+          <div
+            className="rounded-2xl p-8 mb-12 transition-all duration-300 hover:shadow-lg"
+            style={{
+              background: "linear-gradient(135deg, #FF8C00 0%, #E67E00 100%)",
+              color: "white",
+              boxShadow: "0 4px 20px rgba(255, 140, 0, 0.15)",
+            }}
+          >
             <h3
               className="text-xl font-bold mb-3 flex items-center gap-2"
             >
