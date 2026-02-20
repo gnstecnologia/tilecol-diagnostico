@@ -1,19 +1,7 @@
 /* 
-  Design System: Auditoria Corporativa — Consulting Report Style
-  Inspired by McKinsey/Deloitte reports + modern SaaS dashboards
-  
-  Color Philosophy:
-  - Background: warm white (#FAFAF8) — easy on the eyes
-  - Primary text: dark graphite (#1A1A2E)
-  - Primary accent: deep navy (#0F3460) — trust & authority
-  - Alert accent: red-orange (#E94560) — critical issues
-  - Success accent: emerald green (#16C79A) — positive points
-  - Warning accent: amber (#F5A623) — improvement areas
-  
-  Typography:
-  - Headings: Sora (700) — modern, geometric
-  - Body: DM Sans (400/500) — readable, professional
-  - Metrics: JetBrains Mono — technical values
+  Design System: Tilecol Modern Audit Report
+  Paleta: Laranja vibrante (#FF8C00) + Cinza escuro + Branco
+  Inspiração: Design moderno, corporativo, com toques de energia
 */
 
 @import "tailwindcss";
@@ -53,41 +41,46 @@
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.988 0.003 80);
+  --radius: 0.625rem;
+  /* Paleta Tilecol */
+  --tilecol-orange: #FF8C00;
+  --tilecol-orange-dark: #E67E00;
+  --tilecol-orange-light: #FFB347;
+  --tilecol-dark: #1A1A2E;
+  --tilecol-gray: #4A5568;
+  --tilecol-light: #F8F9FA;
+  --tilecol-border: #E8EAED;
+  
+  /* Status colors */
+  --status-critical: #DC2626;
+  --status-warning: #F59E0B;
+  --status-success: #10B981;
+  --status-info: #3B82F6;
+  
+  --background: oklch(0.995 0.001 70);
   --foreground: oklch(0.18 0.02 265);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.02 265);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.02 265);
-  --primary: oklch(0.32 0.09 265);
+  --primary: #FF8C00;
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.96 0.005 80);
   --secondary-foreground: oklch(0.35 0.02 265);
   --muted: oklch(0.96 0.003 80);
   --muted-foreground: oklch(0.52 0.015 265);
-  --accent: oklch(0.96 0.003 80);
-  --accent-foreground: oklch(0.18 0.02 265);
-  --destructive: oklch(0.6 0.22 25);
+  --accent: #FF8C00;
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: #DC2626;
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.91 0.005 265);
-  --input: oklch(0.91 0.005 265);
-  --ring: oklch(0.32 0.09 265);
-  --chart-1: oklch(0.32 0.09 265);
-  --chart-2: oklch(0.6 0.22 25);
-  --chart-3: oklch(0.65 0.15 160);
-  --chart-4: oklch(0.72 0.18 75);
-  --chart-5: oklch(0.55 0.15 295);
-
-  /* Custom brand colors */
-  --navy: #0F3460;
-  --navy-light: #1a4a7a;
-  --red-alert: #E94560;
-  --green-success: #16C79A;
-  --amber-warning: #F5A623;
-  --graphite: #1A1A2E;
-  --warm-white: #FAFAF8;
-  --sidebar-width: 260px;
+  --border: #E8EAED;
+  --input: #E8EAED;
+  --ring: #FF8C00;
+  --chart-1: #FF8C00;
+  --chart-2: #DC2626;
+  --chart-3: #10B981;
+  --chart-4: #F59E0B;
+  --chart-5: #3B82F6;
 }
 
 @layer base {
@@ -96,7 +89,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -107,7 +100,9 @@
     @apply cursor-pointer;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.5px;
   }
 }
 
@@ -140,42 +135,76 @@
     }
   }
 
-  /* Score ring animation */
+  /* Modern Score Ring */
   .score-ring {
-    transition: stroke-dashoffset 1.5s ease-in-out;
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 4px 12px rgba(255, 140, 0, 0.15));
   }
 
-  /* Sidebar active state */
+  /* Sidebar Active State - Tilecol Orange */
   .sidebar-item-active {
-    background: rgba(15, 52, 96, 0.08);
-    border-left: 3px solid #0F3460;
-    color: #0F3460;
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 140, 0, 0.06) 100%);
+    border-left: 3px solid #FF8C00;
+    color: #FF8C00;
     font-weight: 600;
   }
 
-  /* Priority badges */
+  /* Priority Badges */
   .badge-high {
-    background: rgba(233, 69, 96, 0.12);
-    color: #c0293e;
-    border: 1px solid rgba(233, 69, 96, 0.3);
+    background: rgba(220, 38, 38, 0.12);
+    color: #991B1B;
+    border: 1px solid rgba(220, 38, 38, 0.3);
   }
   .badge-medium {
-    background: rgba(245, 166, 35, 0.12);
-    color: #c47a00;
-    border: 1px solid rgba(245, 166, 35, 0.3);
+    background: rgba(245, 158, 11, 0.12);
+    color: #92400E;
+    border: 1px solid rgba(245, 158, 11, 0.3);
   }
   .badge-low {
-    background: rgba(22, 199, 154, 0.12);
-    color: #0d9e7a;
-    border: 1px solid rgba(22, 199, 154, 0.3);
+    background: rgba(16, 185, 129, 0.12);
+    color: #065F46;
+    border: 1px solid rgba(16, 185, 129, 0.3);
   }
 
-  /* Metric bar */
+  /* Status Badges */
+  .status-installed {
+    background: rgba(16, 185, 129, 0.12);
+    color: #065F46;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+  .status-absent {
+    background: rgba(220, 38, 38, 0.12);
+    color: #991B1B;
+    border: 1px solid rgba(220, 38, 38, 0.3);
+  }
+  .status-partial {
+    background: rgba(245, 158, 11, 0.12);
+    color: #92400E;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+
+  /* Metric Bar Fill Animation */
   .metric-bar-fill {
-    transition: width 1.2s ease-in-out;
+    transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  /* Print styles */
+  /* Modern Card Hover Effect */
+  .metric-card {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(255, 140, 0, 0.08);
+  }
+
+  /* Gradient Divider */
+  .gradient-divider {
+    background: linear-gradient(to right, #FF8C00, transparent);
+    height: 2px;
+    border-radius: 1px;
+  }
+
+  /* Print Styles */
   @media print {
     .no-print { display: none !important; }
     .sidebar { display: none !important; }
